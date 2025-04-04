@@ -1,0 +1,411 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    background-color: whitesmoke;
+    position: absolute;
+}
+body::-webkit-scrollbar{
+    display: none;
+}
+.loaderContainer{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 10;
+    background-color: black;
+    opacity: 0.7;
+    display: none;
+}
+@keyframes rotate {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+.loader{
+    width: 10vw;
+    height: 10vw;
+    position: fixed;
+    z-index: 11;
+    background-color: transparent;
+    top: 40vh;
+    left: 45vw;
+    border-width: 1vw;
+    border-style: solid;
+    border-radius: 50%;
+    border-left-color: #051726;
+    border-right-color: #051726;
+    border-top-color: white;
+    border-bottom-color: white;
+    animation-name: rotate;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    display: none;
+}
+.topNav{
+    width: 100vw;
+    height: 10vh;
+    background-color: #051726;
+    color: white;
+}
+.dropDown{
+    position: absolute;
+    margin-top: 3.5vh;
+}
+.dropDown .menuBtn{
+    font-size: x-large;
+    background-color: transparent;
+    margin-top: 2vh;
+    margin-left: 1vw;
+    border: none;
+    color: white;
+}
+.menu{
+    color: white;
+    width: 20vw;
+    padding-bottom: 1vh;
+    position: absolute;
+    z-index: 2;
+    opacity: 0.9;
+    background-color: #051726;
+    display: none;
+}
+
+.menu a{
+    padding: 5%;
+    margin-top: 1vh;
+    width: 100%;
+    display: block;
+}
+.menu a:hover{
+    background-color: white;
+    color: black;
+}
+.menu a:hover .tags{
+    background-color: white;
+    color: black;
+}
+.menuBtn:hover{
+    color: black;
+    cursor: pointer;
+}
+.dropDown:hover .menu{
+    display: block;
+}
+.tags{
+    text-decoration: none;
+    font-size: medium;
+    color: white;
+    padding: auto;
+}
+.searchSection{
+    display: -webkit-inline-box;
+    margin-left: 1vw;
+}
+.searchBtn{
+    width: 30vw;
+    padding: 1vh;
+    font-size: medium;
+    border-right: none;
+    border-right-color: white;
+    border-right-width: 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin-top: 2vh;
+    font-weight: 500;
+    border-color: #051726;
+}
+.submitBtn{
+    width: auto;
+    padding: 1vh;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left: none;
+    border-width: 2px;
+    background-color: white;
+    margin-top: 2vh;
+    font-size: medium;
+    font-weight: 500;
+    border-color: #051726;
+}
+.popupContainer{
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    position: fixed;
+    z-index: 5;
+    background-color: black;
+    opacity: 0.7;
+    display: none;
+    overflow-y: hidden;
+}
+@keyframes scale {
+    from{
+        scale: 0.7;
+    }
+    to{
+        scale: 1;
+    }
+}
+.popup{
+    width: 78vw;
+    height: 40vw;
+    left: 10vw;
+    top: 10vh;
+    position: fixed;
+    z-index: 6;
+    opacity: 0.9;
+    display: none;
+    color: white;
+    background-color: #051726;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    animation-delay: 1s;
+    border-radius: 10px;
+    border-style: solid;
+    animation: 1s scale linear;
+}
+.popup::-webkit-scrollbar{
+    display: none;
+}
+#exitBtn{
+    float: right;
+    margin: 1vh;
+    width: 4vw;
+    height: auto;
+    font-size: x-large;
+    background-color: transparent;
+    border: none;
+    color: red;
+}
+#exitBtn:hover{
+    box-shadow: 2px 2px 5px red;
+}
+.infoTitle{
+    color: white;
+    width: auto;
+    height: 5vh;
+}
+.infoType{
+    color: white;
+    width: auto;
+    height: 5vh;
+}
+.container{
+    width: 76vw;
+    margin-left: 1vw;
+}
+.rightSubcontainer{
+    width: 20vw;
+    height: 30vw;
+    float: right;
+}
+.infoTable{
+    width: 100%;
+}
+table td{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+table tr:nth-child(even){
+    background-color: #081e30;
+}
+.infoTable tr{
+    margin-bottom: 1vh;
+}
+.leftSubcontainer{
+    width: 50vw;
+    height: 30vw;
+}
+.infoImage{
+    width: 20vw;
+    height: 30vw;
+}
+.rootContainer{
+    width: 100vw;
+    height: auto;
+    margin-top: 2vh;
+    padding-left: 1vw;
+    background-color: whitesmoke;
+}
+.bioDataContainer{
+    background-color: whitesmoke;
+    width: 23vw;
+    height: 22vw;
+    border-radius: 5px;
+    margin-left: 1vw;
+    margin-top: 4vh;
+    display: inline-block;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(241, 241, 241);
+    box-shadow: 0.5px 0.5px 0px gray;
+}
+.bioDataImage{
+    width: 23vw;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 16vw;
+}
+.bioDataName{
+    font-size: 1rem;
+    font-family: "Ubuntu", Arial, Tahoma, sans-serif;
+    font-weight: 600;
+    font-style: italic;
+}
+.bioDataSubcontainer{
+    width: 23vw;
+    height: auto;
+}
+.viewMore{
+    width: 12vw;
+    padding: 2%;
+    background-color: #051726;
+    margin-top: 1vh;
+    margin-left: 5vw;
+    font-weight: 600;
+    border-width: 0px;
+    border-radius: 5px;
+    color: white;
+}
+@media screen and (max-width: 1250px){
+    .menu{
+        width: 40vw;
+    }
+    .searchBtn{
+        width: 50vw;
+    }
+    .popup{
+        width: 94vw;
+        left: 3vw;
+        height: auto;
+        display: none;
+        padding-bottom: 2vh;
+    }
+    .container{
+        width: 94vw;
+        margin-left: 0;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .rightSubcontainer{
+        width: 90%;
+        height: auto;
+        margin-left: 5%;
+    }
+    .leftSubcontainer{
+        width: 90%;
+        height: auto;
+        margin-left: 5%;
+        padding-top: 10vh;
+        background: linear-gradient(to left, white, whitesmoke);
+        color: black;
+        padding-bottom: 2vh;
+        padding-left: 2vh;
+        padding-right: 2vh;
+        font-family: "Ubuntu", Arial, Tahoma, sans-serif;
+        font-size: 20px;
+        font-weight: 500;
+    }
+    .infoTable{
+        font-size: 12px;
+    }
+    table td{
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+    table tr:nth-child(even){
+        background-color: rgb(214, 213, 213);
+    }
+    .infoImage{
+        width: 96%;
+        margin-left: 2%;
+        height: 50vw;
+        transform: translateY(6vh);
+    }
+    .rootContainer{
+        padding-left: 6vw;
+    }
+    .bioDataContainer{
+        width: 40vw;
+        height: 36vw;
+        margin-left: 2vw;
+        margin-bottom: 1vh;
+        box-shadow: 0.3px 0.3px 0px gray;
+    }
+    .bioDataImage{
+        width: 40vw;
+        height: 25vw;
+        margin-bottom: 0;
+    }
+    .bioDataName{
+        font-size: 0.8rem;
+        height: 2vh;
+        font-weight: 600;
+        background-color: whitesmoke;
+        opacity: 0.8;
+        color: black;
+        margin-top: 0;
+        transform: translateY(-2vh);
+    }
+    .bioDataSubcontainer{
+        width: 40vw;
+        height: 26vw;
+    }
+    .viewMore{
+        width: 20vw;
+        padding: 2%;
+        margin-top: 1vh;
+        background-color: #051726;
+        margin-left: 10vw;
+        font-size: 10px;
+        font-weight: 500;
+        border-width: 0px;
+        border-radius: 5px;
+        color: white;
+    }
+}
+@media screen and (min-width: 2000px){
+    body{
+        background-color: whitesmoke;
+    }
+    .topNav{
+        width: 100vw;
+    }
+    .tags{
+        font-size: larger;
+    }
+    .rootSection{
+        width: 80vw;
+        margin-left: 10vw;
+    }
+    .rootContainer{
+        width: 80vw;
+        padding-left: 1.5vw;
+    }
+    .bioDataContainer{
+        width: 18vw;
+        height: 20vw;
+    }
+    .bioDataImage{
+        width: 18vw;
+    }
+    .bioDataSubcontainer{
+        width: 18vw;
+    }
+    .viewMore{
+        width: 70%;
+        margin-left: 15%;
+    }
+}

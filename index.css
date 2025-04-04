@@ -1,0 +1,576 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    overflow-x: hidden;
+    background-color: whitesmoke;
+}
+.headerSection{
+    height: 12vh;
+    width: 100vw;
+    background-color: #051726;
+    color: white;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    border-bottom-color: white;
+    border-bottom-style: solid;
+    border-width: 1px;
+}
+.dropDown{
+    position: absolute;
+    margin-top: 3.5vh;
+}
+.dropDown .menuBtn{
+    font-size: x-large;
+    background-color: transparent;
+    margin-top: 4vh;
+    margin-left: 1vw;
+    border: none;
+    color: white;
+}
+.menu{
+    color: black;
+    width: 20vw;
+    padding-bottom: 1vh;
+    position: absolute;
+    z-index: 20;
+    opacity: 0.9;
+    background-color:white;
+    display: none;
+}
+
+.menu a{
+    padding: 5%;
+    margin-top: 1vh;
+    width: 100%;
+    display: block;
+}
+.menu a:hover{
+    background-color: black;
+    color: white;
+}
+.menu a:hover .tags{
+    background-color: white;
+    color: black;
+}
+.menuBtn:hover{
+    color: black;
+    cursor: pointer;
+}
+.dropDown:hover .menu{
+    display: block;
+}
+.tags{
+    text-decoration: none;
+    font-size: medium;
+    color: black;
+    padding: auto;
+    font-weight: 600;
+    font-family: Libre Baskerville, Arial, Tahoma, sans-serif;
+}
+.logoSection{
+    float: right;
+    width: 16vw;
+    height: 10vh;
+    border: none;
+}
+.logoHeader{
+    margin-top: 6vh;
+    margin-left: 2vw;
+    font-family: "Ubuntu", Arial, Tahoma, sans-serif;
+}
+.mainSection{
+    position: relative;
+    top: 12vh;
+    background-color: teal;
+    width: 100vw;    
+}
+.rectangle{
+    width: 100vw;
+    height: 45vh;
+    background-color: #051726;
+}
+.trapezium{
+    border-left: 60vw solid transparent;
+    border-right: 39vw solid transparent;
+    border-bottom: 5vw solid #051726;
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
+    transform: rotateX(180deg);
+	width: 100vw;
+}
+.introContainer{
+    position: absolute;
+    top: 0vh;
+    width: 100vw;
+    height: 20vh;
+}
+.introContainer h2{
+    font-family: "Ubuntu", Arial, Tahoma, sans-serif;
+    font-size: 36px;
+    font-weight: 600;
+    width: 20vw;
+    margin-left: 40vw;
+    margin-top: 10vh;
+    text-align: center;
+    border-top-style: solid;
+    padding-top: 2%;
+    border-image:linear-gradient(to right, #051726, gray);
+    border-image-slice: 5;
+    color: white;
+}
+.introContainer h3{
+    font-family: Libre Baskerville, Arial, Tahoma, sans-serif;
+    font-weight: 500;
+    word-spacing: 2px;
+    letter-spacing: 1px;
+    width: 50vw;
+    margin-left: 25vw;
+    margin-top: 2vh;
+    color: white;
+}
+.viewMore{
+    width: 10vw;
+    height: 10vh;
+    background-color: white;
+    border: none;
+    margin-left: 45vw;
+    margin-top: 3vh;
+    border-radius: 40px;
+    font-family: Libre Baskerville, Arial, Tahoma, sans-serif;
+    font-weight: 600;
+    font-size: large;
+}
+@keyframes blink {
+    from{
+        opacity: 0.2;
+    }
+    to{
+        opacity: 1;
+    }
+}
+.arrow{
+    transform: translateY(-10vh);
+    margin-left: 53vw;
+    width: 10vw;
+    animation: 1s blink linear infinite;
+}
+.mainContainer{
+    width: 100vw;
+    padding-top: 15vh;
+}
+.mainContainer h2{
+    font-family: "Ubuntu", Arial, Tahoma, sans-serif;
+    font-size: 36px;
+    font-weight: 600;
+    width: 20vw;
+    margin-left: 40vw;
+    margin-top: 10vh;
+    text-align: center;
+    color: white;
+    border-top-style: solid;
+    padding-top: 2%;
+    border-image:linear-gradient(to right, white, gray);
+    border-image-slice: 5;
+}
+@keyframes rightAppear{
+    from{
+        margin-right: 0;
+    }
+    to{
+        margin-right: 10vw;
+    }
+}
+.rightSubcontainer{
+    margin-top: 5vh;
+    float: right;
+    width: 50vw;
+    height: 50vh;
+    background: linear-gradient(to left,rgb(221, 221, 221), rgb(235, 234, 234), whitesmoke, rgb(245, 244, 244));
+    margin-right: 10vw;
+    border-radius: 10px;
+    animation: 3s rightAppear linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+}
+.content{
+    width: 40vw;
+    margin-left: 8vw;
+    margin-top: 5vh;
+}
+.content h3{
+    font-family: "Ubuntu", Arial, Tahoma, sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+}
+.content ul{
+    padding: 2%;
+    font-family: Libre Baskerville, Arial, Tahoma, sans-serif;
+    font-weight: 500;
+}
+.content li::before {
+    content: "\2713"; /* Checkmark unicode character */
+    font-size: 1.2em; /* Adjust size as needed */
+    color: black; /* Adjust color as needed */
+    margin-right: 0.5em; /* Add space between checkmark and text */
+    position: relative; /* For precise positioning */
+    top: -0.1em; /* Adjust vertical position */
+}
+@keyframes leftAppear{
+    from{
+        margin-left: 0;
+    }
+    to{
+        margin-left: 17vw;
+    }
+}
+.leftSubcontainer{
+    margin-top: 5vh;
+    width: 40vw;
+    height: 50vh;
+}
+.subcontainerImage{
+    width: 30vw;
+    height: 46vh;
+    margin-top: 7vh;
+    margin-left: 17vw;
+    animation: 3s leftAppear linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+}
+.additionalInfo{
+    width: 100vw;
+    margin-top: 10vh;
+}
+.rightCard{
+    float: right;
+    width: 40vw;
+    margin-right: 8vw;
+    padding: 2%;
+    background-color: #051726;
+    border-radius: 10px;
+    animation: 1s blink linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+}
+@keyframes scale{
+    from{
+        scale: 0.7;
+    }
+    to{
+        scale: 1;
+    }
+}
+.cardImage{
+    width: 30vw;
+    height: 20vw;
+    margin-left: 3vw;
+    transform: translateY(6vh);
+    animation: 2s scale linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+}
+@keyframes slide {
+    from{
+        margin-top: 3vh;
+    }
+    to{
+        margin-top: 0;
+    }
+}
+.cardContent h3{
+    font-family: "Ubuntu", Arial, Tahoma, sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+    padding-bottom: 3vh;
+    animation: 2s slide linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+}
+.cardContent{
+    padding-top: 7vh;
+    width: 100%;
+    height: 20vw;
+    background-color: white;
+    font-family: Libre Baskerville, Arial, Tahoma, sans-serif;
+    font-size: large;
+    font-style: italic;
+    font-weight: 600;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    padding-bottom: 2vw;
+    text-align: center;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    animation: 2s slide linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+}
+.leftCard{
+    width: 40vw;
+    margin-left: 8vw;
+    padding: 2%;
+    background-color: #051726;
+    border-radius: 10px;
+    animation: 1s blink linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+}
+footer{
+    width: 100vw;
+    height: 10vh;
+    margin-top: 10vh;
+    padding-top: 5vh;
+    font-family: "Ubuntu", Arial, Tahoma, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    background-color: whitesmoke;
+}
+@media screen and (max-width: 1000px){
+    .logoSection{
+        width: 28vw;
+        margin-right: 2vw;
+    }
+    .logoHeader{
+        margin-left: 0;
+    }
+    .page{
+        height: 50vh;
+        width: 100vw;
+    }
+    .menu{
+        width: 40vw;
+    }
+    .rectangle{
+        height: 35vh;
+    }
+    .trapezium{
+        border-bottom: 15vw solid #051726;
+    }
+    .introContainer h2{
+        width: 70vw;
+        margin-left: 15vw;
+        margin-top: 5vh;
+    }
+    .introContainer h3{
+        width: 96vw;
+        margin-left: 3vw;
+    }
+    .viewMore{
+        width: 30vw;
+        height: 5vh;
+        margin-left: 25vw;
+    }
+    .arrow{
+        width: 28vw;
+        margin-left: 47vw;
+    }
+    .mainContainer{
+        padding-top: 5vh;
+    }
+    .mainContainer h2{
+        width: 70vw;
+        margin-left: 15vw;
+    }
+    .contentSubcontainer{
+        margin-top: 0;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .leftSubcontainer{
+        padding-top: 0;
+        margin-bottom: 0;
+        width: 96vw;
+        height: auto;
+        margin-left: 2vw;
+    }
+    @keyframes leftAppear{
+        from{
+            margin-left: -5%;
+        }
+        to{
+            margin-left: 5%;
+        }
+    }
+    @keyframes slideUp{
+        from{
+            margin-top: 5vh;
+        }
+        to{
+            margin-top: 0vh;
+        }
+    }
+    .subcontainerImage{
+        width: 90%;
+        margin-left: 5%;
+        height: 30vh;
+        transform: translateY(6vh);
+        animation: 2s leftAppear linear;
+        animation-timeline: view();
+        animation-range: entry 0% cover 40%;
+    }
+    .rightSubcontainer{
+        margin-top: 0;
+        padding-top: 8vh;
+        width: 96vw;
+        height: auto;
+        border-radius: 0;
+        margin-left: 2vw;
+        animation: 2s slideUp linear;
+        animation-timeline: view();
+        animation-range: entry 0% cover 40%;
+    }
+    .content{
+        width: 94%;
+        margin-left: 3%;
+    }
+    .additionalInfo{
+        margin-top: 5vh;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .leftCard{
+        width: 96vw;
+        margin-left: 2vw;
+        margin-bottom: 5vh;
+        height: auto;
+        padding-bottom: 2vh;
+    }
+    .cardImage{
+        width: 90%;
+        height: 30vh;
+        margin-left: 5%;
+    }
+    .cardContent{
+        height: auto;
+        background: linear-gradient(to right, white, whitesmoke);
+    }
+    .rightCard{
+        width: 96vw;
+        margin-left: 2vw;
+        height: auto;
+        padding-bottom: 2vh;
+    }
+}
+@media screen and (min-width: 2000px){
+    *{
+        font-size: x-large;
+    }
+    body{
+        background-color: #051726;
+    }
+    .headerSection{
+        width: 100vw;
+    }
+    .tags{
+        font-size: larger;
+    }
+    .mainSection{
+        width: 100vw;
+        /* margin-left: 10vw; */
+    }
+    .rectangle{
+        width: 100vw;
+        /* height: 20vw; */
+    }
+    .trapezium{
+        width: 100vw;
+        border-left: 60vw solid transparent;
+        border-right: 39vw solid transparent;
+        border-bottom: 5vw solid #051726;
+        border-top-left-radius: 5%;
+        border-top-right-radius: 5%;
+    }
+    .introContainer{
+        width: 100vw;
+    }
+    .introContainer h2{
+        margin-left: 40%;
+        width: 20%;
+    }
+    .introContainer h3{
+        width: 50%;
+        margin-left: 25%;
+    }
+    .viewMore{
+        height: 3vw;
+        margin-left: 40%;
+    }
+    .arrow{
+        margin-left: 50%;
+    }
+    .mainContainer{
+        width: 100vw;
+    }
+    .mainContainer h2{
+        margin-left: 40%;
+        width: 20%;
+    }
+    .contentSubcontainer{
+        width: 100vw;
+        height: 20vw;
+        margin-top: 5vw;
+    }
+    @keyframes rightAppear{
+        from{
+            margin-right: 0;
+        }
+        to{
+            margin-right: 10%;
+        }
+    }
+    .rightSubcontainer{
+        width: 50%;
+        height: 20vw;
+        margin-right: 10%;
+    }
+    .content{
+        width: 60%;
+        margin-left: 20%;
+    }
+    @keyframes leftAppear{
+        from{
+            margin-left: 0;
+        }
+        to{
+            margin-left: 25%;
+        }
+    }
+    .leftSubcontainer{
+        width: 40%;
+        height: 20vw;
+    }
+    .subcontainerImage{
+        width: 30vw;
+        height: 18vw;
+        margin-left: 25%;
+    }
+    .additionalInfo{
+        width: 100vw;
+    }
+    .rightCard{
+        width: 40%;
+        margin-right: 8%;
+    }
+    .cardImage{
+        width: 90%;
+        margin-left: 3%;
+    }
+    .cardContent{
+        height: 22vw;
+        padding-bottom: 1vh;
+        font-size: x-large;
+    }
+    .leftCard{
+        width: 40%;
+        margin-left: 8%;
+    }
+    footer{
+        width: 100vw;
+    }
+}

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tribute</title>
+    <link rel="shortcut icon" href="tributeLogo.png" type="image/x-icon">
+    <link rel="stylesheet" href="tribute.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <div class="loaderContainer" id="loaderContainer"></div>
+  <div class="loader" id="loader"></div>
+  <div class="topNav">
+    <div class="dropDown">
+      <button class="menuBtn"><i class="fa fa-bars"></i></button>
+        <div class="menu">
+          <a href="tribute.html" class="tags"><i class="fa fa-folder"></i>Tributes</a>
+          <a href="index.html" class="tags"><i class="fa fa-home"></i>Home</a>
+        </div>
+    </div>
+  </div>
+  <section class="rootSection">
+    <div class="searchSection">
+      <input type="text" class="searchBtn" id="searchBtn" placeholder="Search by Name">
+      <button type="submit" id="submitBtn" class="submitBtn"><i class="fa fa-search"></i></button>
+    </div>
+    <div class="popupContainer" id="popupContainer"></div>
+    <div class="popup" id="popup"></div>
+    <div class="rootContainer" id="rootContainer"></div>
+  </section>
+
+<script>
+  loaderContainer.style.display = "block";
+  loader.style.display = "block";
+  window.addEventListener('load', (event) => {
+    loaderContainer.style.display = "none";
+    loader.style.display = "none";
+  });
+  
+  let searchQuery = document.getElementById("searchBtn");
+  submitBtn.onclick = function(){
+    loaderContainer.style.display = "block";
+    loader.style.display = "block";  
+    let databaseSearchQuery = {
+      name: searchQuery.value
+    }
+    fetch("databaseSearch.php", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify(databaseSearchQuery)
+  })
+  .then(response => {
+    if(!response.ok){
+      console.log("Error");
+    }
+    return response.text();
+    })
+    .then(text => {
+      loaderContainer.style.display = "none";
+      loader.style.display = "none";
+      if(text === ""){
+        checkOnline();
+      }
+      else{
+        let formattedData = JSON.parse(text);
+        let popupContainer = document.getElementById('popupContainer');
+        let popup = document.getElementById('popup');
+        popupContainer.style.display="grid";
+        popup.style.display="grid";
+        popup.innerHTML = `
+        <button id="exitBtn"><i class="fa fa-close"></i></button>
+        <center><h2 class="infoTitle">${formattedData.name}</h2></center>
+        <center><h3 class="infoType">${formattedData.type}</h3></center>
+        <div class="container">
+        <div class="rightSubcontainer">
+          <img src="${formattedData.image}" class="infoImage">  
+        </div>
+        <div class="leftSubcontainer">
+          <table class="infoTable" border="0">
+            <tr>
+              <td>Born</td>
+              <td>${formattedData.born}</td>
+            </tr>
+            <tr>
+              <td>Education</td>
+              <td>${formattedData.education}</td>
+            </tr>
+            <tr>
+              <td>Spouse</td>
+              <td>${formattedData.spouse}</td>
+            </tr>
+            <tr>
+              <td>Children</td>
+              <td>${formattedData.children}</td>
+            </tr>
+            <tr>
+              <td>Organizations founded</td>
+              <td>${formattedData.organization}</td>
+            </tr>
+            <tr>
+              <td>Partner</td>
+              <td>${formattedData.partner}</td>
+            </tr>
+            <tr>
+              <td>Net worth</td>
+              <td>${formattedData.networth}</td>
+            </tr>
+          </table>
+          </div>
+        </div>
+          `
+        exitBtn.onclick = function(){
+          popupContainer.style.display="none";
+          popup.style.display="none";
+        }
+      }
+    })
+  }
+
+
+function checkOnline(){
+    loaderContainer.style.display = "block";
+    loader.style.display = "block";  
+    const raw = JSON.stringify({
+      "q": searchQuery.value
+    });
+const requestOptions = {
+  method: "POST",
+  headers: {'X-API-KEY': 'd2b41603a9418b5edfce64435da9a9aef48a7131', 'Content-Type': 'application/json'},
+  body: raw,
+  redirect: "follow"
+};
+
+try {
+  fetch("https://google.serper.dev/search", requestOptions)
+  .then(response => {
+    if(!response.ok){
+      throw new Error("not okay")
+    }
+    return response.json();
+  })
+  .then(data => {
+    loaderContainer.style.display = "none";
+    loader.style.display = "none";
+    if(data.knowledgeGraph === undefined ||   data.knowledgeGraph.attributes['Born'] === undefined){
+      window.alert("There is no knowledge graph for the person");
+    }
+    
+    else if(data.images === undefined && data.knowledgeGraph.imageUrl !== undefined){
+      let info = data.knowledgeGraph.attributes;
+      let infoTitle = data.knowledgeGraph.title;
+    let infoType = data.knowledgeGraph.type;
+    let infoImg = data.knowledgeGraph.imageUrl;
+    let popupContainer = document.getElementById('popupContainer');
+    let popup = document.getElementById('popup');
+    popupContainer.style.display="grid";
+    popup.style.display="grid";
+
+    popup.innerHTML = `
+    <button id="exitBtn"><i class="fa fa-close"></i></button>
+    <center><h2 class="infoTitle">${infoTitle}</h2></center>
+    <center><h3 class="infoType">${infoType}</h3></center>
+    <div class="container">
+    <div class="rightSubcontainer">
+      <img src="${infoImg}" class="infoImage">  
+    </div>
+    <div class="leftSubcontainer">
+      <table class="infoTable" border="0">
+        <tr>
+          <td>Born</td>
+          <td>${info['Born']}</td>
+        </tr>
+        <tr>
+          <td>Education</td>
+          <td>${info['Education']}</td>
+        </tr>
+        <tr>
+          <td>Spouse</td>
+          <td>${info['Spouse']}</td>
+        </tr>
+        <tr>
+          <td>Children</td>
+          <td>${info['Children']}</td>
+        </tr>
+        <tr>
+          <td>Organizations founded</td>
+          <td>${info['Organizations founded']}</td>
+        </tr>
+        <tr>
+          <td>Partner</td>
+          <td>${info['Partner']}</td>
+        </tr>
+        <tr>
+          <td>Net worth</td>
+          <td>${info['Net worth']}</td>
+        </tr>
+      </table>
+      </div>
+    </div>
+    `
+    let bioData = {
+      name: infoTitle,
+      type: infoType,
+      image: infoImg,
+      born: info['Born'],
+      education: info['Education'],
+      spouse: info['Spouse'],
+      children: info['Children'],
+      organization: info['Organizations founded'],
+      partner: info['Partner'],
+      networth: info['Net worth']
+    }
+    fetch("tribute.php", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify(bioData)
+  })
+  .then(response => {
+    if(!response.ok){
+      console.log("Error");
+    }
+    return response.text();
+    })
+    .then(data => {
+      console.log(data);
+    })
+    }
+    else{
+      let info = data.knowledgeGraph.attributes;
+      let infoTitle = data.knowledgeGraph.title;
+    let infoImg = data.images[0]['imageUrl'];
+    let infoType = data.knowledgeGraph.type;
+    let popupContainer = document.getElementById('popupContainer');
+    let popup = document.getElementById('popup');
+    popupContainer.style.display="grid";
+    popup.style.display="grid";
+      popup.innerHTML = `
+    <button id="exitBtn"><i class="fa fa-close"></i></button>
+    <center><h2 class="infoTitle">${infoTitle}</h2></center>
+    <center><h3 class="infoType">${infoType}</h3></center>
+    <div class="container">
+    <div class="rightSubcontainer">
+      <img src="${infoImg}" class="infoImage">  
+    </div>
+    <div class="leftSubcontainer">
+      <table class="infoTable" border="0">
+        <tr>
+          <td>Born</td>
+          <td>${info['Born']}</td>
+        </tr>
+        <tr>
+          <td>Education</td>
+          <td>${info['Education']}</td>
+        </tr>
+        <tr>
+          <td>Spouse</td>
+          <td>${info['Spouse']}</td>
+        </tr>
+        <tr>
+          <td>Children</td>
+          <td>${info['Children']}</td>
+        </tr>
+        <tr>
+          <td>Organizations founded</td>
+          <td>${info['Organizations founded']}</td>
+        </tr>
+        <tr>
+          <td>Partner</td>
+          <td>${info['Partner']}</td>
+        </tr>
+        <tr>
+          <td>Net worth</td>
+          <td>${info['Net worth']}</td>
+        </tr>
+      </table>
+      </div>
+    </div>
+    `
+
+    let bioData = {
+      name: infoTitle,
+      type: infoType,
+      image: infoImg,
+      born: info['Born'],
+      education: info['Education'],
+      spouse: info['Spouse'],
+      children: info['Children'],
+      organization: info['Organizations founded'],
+      partner: info['Partner'],
+      networth: info['Net worth']
+    }
+
+    fetch("tribute.php", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify(bioData)
+  })
+  .then(response => {
+    if(!response.ok){
+      console.log("Error");
+    }
+    return response.text();
+    })
+    .then(data => {
+      console.log(data);
+    })
+    
+  }
+    exitBtn.onclick = function(){
+      popupContainer.style.display="none";
+    popup.style.display="none";
+    window.location.reload();
+    } 
+  })
+} catch (error) {
+  console.error(error);
+};
+}
+
+fetch("bioData.php")
+.then(response => {
+  if(!response.ok){
+    console.log("not okay");
+  }
+  return response.json();
+  })
+  .then(data => {
+  data.forEach(item => {
+    console.log(item);
+    var i=0;
+    let popupContainer = document.getElementById('popupContainer');
+    let popup = document.getElementById('popup');
+    let div = document.createElement('div');
+    let bioDataSubcontainer = document.createElement('div');
+    bioDataSubcontainer.className = 'bioDataSubcontainer';
+    div.className = 'bioDataContainer';
+    let rootContainer = document.getElementById('rootContainer');
+    let viewMore = document.createElement('button');
+    viewMore.className = 'viewMore';
+    viewMore.textContent = 'View More';
+    rootContainer.appendChild(div);
+    div.appendChild(bioDataSubcontainer)
+    div.appendChild(viewMore);
+    while(i< 10){
+      bioDataSubcontainer.innerHTML= `
+        <img src="${item.image}" class="bioDataImage">
+        <center><p class="bioDataName">${item.name}</p></center>
+      `;
+      i++;
+    }
+    viewMore.onclick = function(){
+    popupContainer.style.display="grid";
+    popup.style.display="grid";
+    popup.innerHTML = `
+    <button id="exitBtn"><i class="fa fa-close"></i></button>
+    <center><h2 class="infoTitle">${item.name}</h2></center>
+    <center><h3 class="infoType">${item.type}</h3></center>
+    <div class="container">
+    <div class="rightSubcontainer">
+      <img src="${item.image}" class="infoImage">  
+    </div>
+    <div class="leftSubcontainer">
+      <table class="infoTable" border="0">
+        <tr>
+          <td>Born</td>
+          <td>${item.born}</td>
+        </tr>
+        <tr>
+          <td>Education</td>
+          <td>${item.education}</td>
+        </tr>
+        <tr>
+          <td>Spouse</td>
+          <td>${item.spouse}</td>
+        </tr>
+        <tr>
+          <td>Children</td>
+          <td>${item.children}</td>
+        </tr>
+        <tr>
+          <td>Organizations founded</td>
+          <td>${item.organization}</td>
+        </tr>
+        <tr>
+          <td>Partner</td>
+          <td>${item.partner}</td>
+        </tr>
+        <tr>
+          <td>Net worth</td>
+          <td>${item.networth}</td>
+        </tr>
+      </table>
+      </div>
+    </div>
+    `
+    exitBtn.onclick = function(){
+    popupContainer.style.display="none";
+    popup.style.display="none";
+  } 
+  } 
+  })
+})  
+</script>   
+</body>
+</html>
+
